@@ -2,7 +2,7 @@ const SUPABASE_URL = "https://tpxeyvjgsojeuncqawap.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_mQcMW019j0O2TI3t3qyGEA_iT7ppgz4";
 
-const supabase = window.supabase.createClient(
+const client = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
@@ -54,7 +54,7 @@ async function salvarCliente(){
 
     const id = clientes[editando].id;
 
-    await supabase
+    await client
       .from("clientes")
       .update(cliente)
       .eq("id", id);
@@ -63,7 +63,7 @@ async function salvarCliente(){
 
   }else{
 
-    await supabase
+    await client
       .from("clientes")
       .insert([cliente]);
 
@@ -79,7 +79,7 @@ async function salvarCliente(){
 
 async function buscarClientes(){
 
-  const { data, error } = await supabase
+  const { data, error } = await client
     .from("clientes")
     .select("*")
     .order("id", { ascending:false });
@@ -155,7 +155,7 @@ async function removerCliente(index){
 
   const id = clientes[index].id;
 
-  await supabase
+  await client
     .from("clientes")
     .delete()
     .eq("id", id);
@@ -168,7 +168,8 @@ function editarCliente(index){
 
   let cliente = clientes[index];
 
-  document.getElementById("nome").value = cliente.nome;
+  document.getElementById("nome").value =
+    cliente.nome;
 
   document.getElementById("telefone").value =
     cliente.telefone;
@@ -182,23 +183,6 @@ function editarCliente(index){
   editando = index;
 
   abrirModal();
-
-}
-
-function buscarFiltro(){
-
-  let busca =
-    document.getElementById("busca")
-    .value
-    .toLowerCase();
-
-  let filtrados = clientes.filter(cliente =>
-
-    cliente.nome.toLowerCase().includes(busca)
-
-  );
-
-  renderizarClientes(filtrados);
 
 }
 
