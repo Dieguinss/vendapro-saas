@@ -1,17 +1,8 @@
-const SUPABASE_URL = "https://tpxeyvjgsojeuncqawap.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_mQcMW019j0O2TI3t3qyGEA_iT7ppgz4";
-
-const supabase = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-let clientes = [];
+let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
 let editando = null;
 
-buscarClientes();
+renderizarClientes(clientes);
 
 function abrirModal(){
 
@@ -25,22 +16,16 @@ function fecharModal(){
 
 }
 
-async function salvarCliente(){
+function salvarCliente(){
 
   let nome = document.getElementById("nome").value;
-
   let telefone = document.getElementById("telefone").value;
-
   let empresa = document.getElementById("empresa").value;
-
   let status = document.getElementById("status").value;
 
   if(nome == "" || telefone == ""){
-
     alert("Preencha os campos");
-
     return;
-
   }
 
   let cliente = {
@@ -52,49 +37,23 @@ async function salvarCliente(){
 
   if(editando != null){
 
-    const id = clientes[editando].id;
-
-    await supabase
-      .from("clientes")
-      .update(cliente)
-      .eq("id", id);
+    clientes[editando] = cliente;
 
     editando = null;
 
   }else{
 
-    await supabase
-      .from("clientes")
-      .insert([cliente]);
+    clientes.push(cliente);
 
   }
 
-  buscarClientes();
+  salvarDados();
+
+  renderizarClientes(clientes);
 
   limparCampos();
 
   fecharModal();
-
-}
-
-async function buscarClientes(){
-
-  const { data, error } = await supabase
-    .from("clientes")
-    .select("*")
-    .order("id", { ascending:false });
-
-  if(error){
-
-    console.log(error);
-
-    return;
-
-  }
-
-  clientes = data;
-
-  renderizarClientes(clientes);
 
 }
 
@@ -151,16 +110,13 @@ function renderizarClientes(listaClientes){
 
 }
 
-async function removerCliente(index){
+function removerCliente(index){
 
-  const id = clientes[index].id;
+  clientes.splice(index, 1);
 
-  await supabase
-    .from("clientes")
-    .delete()
-    .eq("id", id);
+  salvarDados();
 
-  buscarClientes();
+  renderizarClientes(clientes);
 
 }
 
@@ -169,15 +125,9 @@ function editarCliente(index){
   let cliente = clientes[index];
 
   document.getElementById("nome").value = cliente.nome;
-
-  document.getElementById("telefone").value =
-    cliente.telefone;
-
-  document.getElementById("empresa").value =
-    cliente.empresa;
-
-  document.getElementById("status").value =
-    cliente.status;
+  document.getElementById("telefone").value = cliente.telefone;
+  document.getElementById("empresa").value = cliente.empresa;
+  document.getElementById("status").value = cliente.status;
 
   editando = index;
 
@@ -185,12 +135,10 @@ function editarCliente(index){
 
 }
 
-function buscarFiltro(){
+function buscarClientes(){
 
   let busca =
-    document.getElementById("busca")
-    .value
-    .toLowerCase();
+    document.getElementById("busca").value.toLowerCase();
 
   let filtrados = clientes.filter(cliente =>
 
@@ -202,12 +150,19 @@ function buscarFiltro(){
 
 }
 
+function salvarDados(){
+
+  localStorage.setItem(
+    "clientes",
+    JSON.stringify(clientes)
+  );
+
+}
+
 function limparCampos(){
 
   document.getElementById("nome").value = "";
-
   document.getElementById("telefone").value = "";
-
   document.getElementById("empresa").value = "";
 
 }
