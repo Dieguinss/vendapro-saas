@@ -1,3 +1,19 @@
+verificarLogin();
+
+async function verificarLogin(){
+
+  const {
+    data: { session }
+  } = await client.auth.getSession();
+
+  if(!session){
+
+    window.location.href = "login.html";
+
+  }
+
+}
+
 const SUPABASE_URL = "https://tpxeyvjgsojeuncqawap.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_mQcMW019j0O2TI3t3qyGEA_iT7ppgz4";
@@ -193,5 +209,13 @@ function limparCampos(){
   document.getElementById("telefone").value = "";
 
   document.getElementById("empresa").value = "";
+
+}
+
+async function logout(){
+
+  await client.auth.signOut();
+
+  window.location.href = "login.html";
 
 }

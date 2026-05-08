@@ -1,33 +1,175 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
   <title>Login - VendaPro</title>
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial;
+    }
+
+    body{
+      background:#0f172a;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .login-box{
+      background:#1e293b;
+      padding:40px;
+      border-radius:20px;
+      width:350px;
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+      box-shadow:0 0 30px rgba(0,0,0,.3);
+    }
+
+    h1{
+      color:white;
+      text-align:center;
+      margin-bottom:10px;
+    }
+
+    input{
+      padding:14px;
+      border:none;
+      border-radius:10px;
+      background:#334155;
+      color:white;
+    }
+
+    button{
+      padding:14px;
+      border:none;
+      border-radius:10px;
+      background:#3b82f6;
+      color:white;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    button:hover{
+      opacity:.9;
+    }
+
+  </style>
+
 </head>
+
 <body>
 
-  <div class="login-container">
+  <div class="login-box">
 
-    <div class="login-box">
+    <h1>VendaPro</h1>
 
-      <h1>VendaPro</h1>
+    <input
+      type="email"
+      placeholder="Seu email"
+      id="email"
+    >
 
-      <input type="email" placeholder="Seu email">
+    <input
+      type="password"
+      placeholder="Sua senha"
+      id="senha"
+    >
 
-      <input type="password" placeholder="Sua senha">
+    <button onclick="login()">
+      Entrar
+    </button>
 
-      <button onclick="login()">
-        Entrar
-      </button>
-
-    </div>
+    <button onclick="cadastro()">
+      Criar Conta
+    </button>
 
   </div>
 
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+    "https://tpxeyvjgsojeuncqawap.supabase.co";
+
+    const SUPABASE_KEY =
+    "sb_publishable_mQcMW019j0O2TI3t3qyGEA_iT7ppgz4";
+
+    const client =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+    async function cadastro(){
+
+      let email =
+        document.getElementById("email").value;
+
+      let senha =
+        document.getElementById("senha").value;
+
+      const { error } =
+      await client.auth.signUp({
+
+        email,
+        password: senha
+
+      });
+
+      if(error){
+
+        alert(error.message);
+
+        return;
+
+      }
+
+      alert("Conta criada com sucesso!");
+
+    }
+
+    async function login(){
+
+      let email =
+        document.getElementById("email").value;
+
+      let senha =
+        document.getElementById("senha").value;
+
+      const { error } =
+      await client.auth.signInWithPassword({
+
+        email,
+        password: senha
+
+      });
+
+      if(error){
+
+        alert(error.message);
+
+        return;
+
+      }
+
+      window.location.href = "index.html";
+
+    }
+
+  </script>
 
 </body>
 </html>
