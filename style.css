@@ -1,0 +1,177 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#0f172a;
+  color:white;
+}
+
+.container{
+  display:flex;
+}
+
+.sidebar{
+  width:250px;
+  height:100vh;
+  background:#111827;
+  padding:30px;
+  position:fixed;
+}
+
+.sidebar h2{
+  margin-bottom:40px;
+  color:#38bdf8;
+}
+
+.sidebar a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  margin-bottom:20px;
+  transition:0.3s;
+}
+
+.sidebar a:hover{
+  color:#38bdf8;
+}
+
+.content{
+  margin-left:250px;
+  width:100%;
+  padding:40px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:40px;
+}
+
+button{
+  background:#38bdf8;
+  border:none;
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-bottom:40px;
+}
+
+.card{
+  background:#1e293b;
+  padding:30px;
+  border-radius:20px;
+}
+
+.card h3{
+  color:#94a3b8;
+  margin-bottom:10px;
+}
+
+.clientes-box{
+  background:#1e293b;
+  padding:30px;
+  border-radius:20px;
+}
+
+.cliente{
+  background:#334155;
+  padding:20px;
+  border-radius:12px;
+  margin-top:15px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.cliente h3{
+  margin-bottom:8px;
+}
+
+.cliente p{
+  color:#cbd5e1;
+}
+
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100vh;
+
+  background:rgba(0,0,0,0.7);
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-box{
+  width:400px;
+  background:#1e293b;
+  padding:30px;
+  border-radius:20px;
+}
+
+.modal-box h2{
+  margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box select{
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+
+  border:none;
+  border-radius:10px;
+
+  background:#334155;
+  color:white;
+}
+
+.clientes-topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  gap:20px;
+}
+
+.clientes-topo input{
+  width:300px;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#334155;
+  color:white;
+}
+
+.acoes{
+  display:flex;
+  gap:10px;
+}
+
+.editar{
+  background:#22c55e;
+}
+
+.excluir{
+  background:#ef4444;
+  color:white;
+}
+
