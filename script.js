@@ -59,12 +59,20 @@ async function salvarCliente(){
 
   }
 
-  let cliente = {
-    nome,
-    telefone,
-    empresa,
-    status
-  };
+  const {
+  data: { user }
+} = await client.auth.getUser();
+
+let cliente = {
+
+  nome,
+  telefone,
+  empresa,
+  status,
+
+  user_id: user.id
+
+};
 
   if(editando != null){
 
@@ -95,9 +103,14 @@ async function salvarCliente(){
 
 async function buscarClientes(){
 
+  const {
+    data: { user }
+  } = await client.auth.getUser();
+
   const { data, error } = await client
     .from("clientes")
     .select("*")
+    .eq("user_id", user.id)
     .order("id", { ascending:false });
 
   if(error){
