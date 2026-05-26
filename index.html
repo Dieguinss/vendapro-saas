@@ -78,13 +78,47 @@
 
         <div class="clientes-topo">
 
-          <h2>Lista de Clientes</h2>
+          <h2>Funil de Vendas</h2>
 
           <input type="text" placeholder="Buscar cliente..." id="busca" onkeyup="buscarClientes()">
 
         </div>
 
-        <div id="lista-clientes"></div>
+        <div class="kanban">
+
+          <div class="coluna">
+
+            <h3>Lead</h3>
+
+            <div id="lead"></div>
+
+          </div>
+
+          <div class="coluna">
+
+            <h3>Contato</h3>
+
+            <div id="contato"></div>
+
+          </div>
+
+          <div class="coluna">
+
+            <h3>Proposta</h3>
+
+            <div id="proposta"></div>
+
+          </div>
+
+          <div class="coluna">
+
+            <h3>Fechado</h3>
+
+            <div id="fechado"></div>
+
+          </div>
+
+        </div>
 
       </section>
 
@@ -108,7 +142,8 @@
 
       <select id="status">
         <option>Lead</option>
-        <option>Quente</option>
+        <option>Contato</option>
+        <option>Proposta</option>
         <option>Fechado</option>
       </select>
 

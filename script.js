@@ -129,9 +129,13 @@ async function buscarClientes() {
 
 function renderizarClientes(listaClientes) {
 
-  let lista = document.getElementById("lista-clientes");
+  document.getElementById("lead").innerHTML = "";
 
-  lista.innerHTML = "";
+  document.getElementById("contato").innerHTML = "";
+
+  document.getElementById("proposta").innerHTML = "";
+
+  document.getElementById("fechado").innerHTML = "";
 
   document.getElementById("total-clientes").innerText =
     listaClientes.length;
@@ -158,7 +162,9 @@ function renderizarClientes(listaClientes) {
 
   listaClientes.forEach((cliente, index) => {
 
-    lista.innerHTML += `
+    let coluna = cliente.status.toLowerCase();
+
+document.getElementById(coluna).innerHTML += `
 
       <div class="cliente">
 

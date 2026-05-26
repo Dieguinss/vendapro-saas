@@ -219,3 +219,64 @@ button{
   color:#3b82f6;
 
 }
+
+.kanban{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit, minmax(250px,1fr));
+
+  gap:20px;
+
+  margin-top:20px;
+
+}
+
+.coluna{
+
+  background:#1e293b;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  min-height:500px;
+
+}
+
+.coluna h3{
+
+  color:white;
+
+  margin-bottom:15px;
+
+}
+
+.card-cliente{
+
+  background:#334155;
+
+  padding:15px;
+
+  border-radius:12px;
+
+  margin-bottom:12px;
+
+  color:white;
+
+}
+
+.card-cliente h4{
+
+  margin-bottom:8px;
+
+}
+
+.card-cliente p{
+
+  font-size:14px;
+
+  margin:5px 0;
+
+}
