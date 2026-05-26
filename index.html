@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <div class="container">
@@ -41,18 +43,33 @@
       <section class="cards">
 
         <div class="card">
-          <h3>Faturamento</h3>
-          <h2>R$ 12.580</h2>
+
+          <h3>Total Clientes</h3>
+
+          <h2 id="total-clientes">
+            0
+          </h2>
+
         </div>
 
         <div class="card">
-          <h3>Clientes</h3>
-          <h2 id="total-clientes">0</h2>
+
+          <h3>Leads Quentes</h3>
+
+          <h2 id="leads-quentes">
+            0
+          </h2>
+
         </div>
 
         <div class="card">
-          <h3>Pedidos</h3>
-          <h2>89</h2>
+
+          <h3>Fechados</h3>
+
+          <h2 id="clientes-fechados">
+            0
+          </h2>
+
         </div>
 
       </section>
@@ -63,12 +80,7 @@
 
           <h2>Lista de Clientes</h2>
 
-          <input
-            type="text"
-            placeholder="Buscar cliente..."
-            id="busca"
-            onkeyup="buscarClientes()"
-          >
+          <input type="text" placeholder="Buscar cliente..." id="busca" onkeyup="buscarClientes()">
 
         </div>
 
@@ -96,7 +108,8 @@
 
       <select id="status">
         <option>Lead</option>
-        <option>Cliente</option>
+        <option>Quente</option>
+        <option>Fechado</option>
       </select>
 
       <button onclick="salvarCliente()">
@@ -111,4 +124,5 @@
   <script src="script.js"></script>
 
 </body>
+
 </html>

@@ -1,12 +1,12 @@
 verificarLogin();
 
-async function verificarLogin(){
+async function verificarLogin() {
 
   const {
     data: { session }
   } = await client.auth.getSession();
 
-  if(!session){
+  if (!session) {
 
     window.location.href = "login.html";
 
@@ -29,19 +29,19 @@ let editando = null;
 
 buscarClientes();
 
-function abrirModal(){
+function abrirModal() {
 
   document.getElementById("modal").style.display = "flex";
 
 }
 
-function fecharModal(){
+function fecharModal() {
 
   document.getElementById("modal").style.display = "none";
 
 }
 
-async function salvarCliente(){
+async function salvarCliente() {
 
   let nome = document.getElementById("nome").value;
 
@@ -51,7 +51,7 @@ async function salvarCliente(){
 
   let status = document.getElementById("status").value;
 
-  if(nome == "" || telefone == ""){
+  if (nome == "" || telefone == "") {
 
     alert("Preencha os campos");
 
@@ -60,21 +60,21 @@ async function salvarCliente(){
   }
 
   const {
-  data: { user }
-} = await client.auth.getUser();
+    data: { user }
+  } = await client.auth.getUser();
 
-let cliente = {
+  let cliente = {
 
-  nome,
-  telefone,
-  empresa,
-  status,
+    nome,
+    telefone,
+    empresa,
+    status,
 
-  user_id: user.id
+    user_id: user.id
 
-};
+  };
 
-  if(editando != null){
+  if (editando != null) {
 
     const id = clientes[editando].id;
 
@@ -85,7 +85,7 @@ let cliente = {
 
     editando = null;
 
-  }else{
+  } else {
 
     await client
       .from("clientes")
@@ -101,7 +101,7 @@ let cliente = {
 
 }
 
-async function buscarClientes(){
+async function buscarClientes() {
 
   const {
     data: { user }
@@ -111,9 +111,9 @@ async function buscarClientes(){
     .from("clientes")
     .select("*")
     .eq("user_id", user.id)
-    .order("id", { ascending:false });
+    .order("id", { ascending: false });
 
-  if(error){
+  if (error) {
 
     console.log(error);
 
@@ -127,7 +127,7 @@ async function buscarClientes(){
 
 }
 
-function renderizarClientes(listaClientes){
+function renderizarClientes(listaClientes) {
 
   let lista = document.getElementById("lista-clientes");
 
@@ -135,6 +135,26 @@ function renderizarClientes(listaClientes){
 
   document.getElementById("total-clientes").innerText =
     listaClientes.length;
+
+  let quentes = listaClientes.filter(cliente =>
+
+    cliente.status == "Quente"
+
+  ).length;
+
+  let fechados = listaClientes.filter(cliente =>
+
+    cliente.status == "Fechado"
+
+  ).length;
+
+  document.getElementById("leads-quentes")
+    .innerText = quentes;
+
+  document.getElementById("clientes-fechados")
+    .innerText = fechados;
+
+
 
   listaClientes.forEach((cliente, index) => {
 
@@ -180,7 +200,7 @@ function renderizarClientes(listaClientes){
 
 }
 
-async function removerCliente(index){
+async function removerCliente(index) {
 
   const id = clientes[index].id;
 
@@ -193,7 +213,7 @@ async function removerCliente(index){
 
 }
 
-function editarCliente(index){
+function editarCliente(index) {
 
   let cliente = clientes[index];
 
@@ -215,7 +235,7 @@ function editarCliente(index){
 
 }
 
-function limparCampos(){
+function limparCampos() {
 
   document.getElementById("nome").value = "";
 
@@ -225,7 +245,7 @@ function limparCampos(){
 
 }
 
-async function logout(){
+async function logout() {
 
   await client.auth.signOut();
 
