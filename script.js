@@ -153,7 +153,7 @@ function renderizarClientes(listaClientes) {
   ).length;
 
   document.getElementById("leads-quentes")
-    .innerText = quentes;
+    .innerText = propostas;
 
   document.getElementById("clientes-fechados")
     .innerText = fechados;
