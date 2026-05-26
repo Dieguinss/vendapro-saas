@@ -164,6 +164,15 @@ function renderizarClientes(listaClientes) {
 
     let coluna = cliente.status.toLowerCase();
 
+    if (
+      coluna != "lead" &&
+      coluna != "contato" &&
+      coluna != "proposta" &&
+      coluna != "fechado"
+    ) {
+      coluna = "lead";
+    }
+
     document.getElementById(coluna).innerHTML += `
 
       <div
@@ -264,7 +273,7 @@ async function logout() {
 
 }
 
-function arrastar(event){
+function arrastar(event) {
 
   event.dataTransfer.setData(
     "id",
@@ -273,13 +282,13 @@ function arrastar(event){
 
 }
 
-function permitirSoltar(event){
+function permitirSoltar(event) {
 
   event.preventDefault();
 
 }
 
-async function soltar(event){
+async function soltar(event) {
 
   event.preventDefault();
 
