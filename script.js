@@ -164,9 +164,14 @@ function renderizarClientes(listaClientes) {
 
     let coluna = cliente.status.toLowerCase();
 
-document.getElementById(coluna).innerHTML += `
+    document.getElementById(coluna).innerHTML += `
 
-      <div class="cliente">
+      <div
+  class="card-cliente"
+  draggable="true"
+  ondragstart="arrastar(event)"
+  data-id="${cliente.id}"
+>
 
         <div>
 
@@ -256,5 +261,43 @@ async function logout() {
   await client.auth.signOut();
 
   window.location.href = "login.html";
+
+}
+
+function arrastar(event){
+
+  event.dataTransfer.setData(
+    "id",
+    event.target.dataset.id
+  );
+
+}
+
+function permitirSoltar(event){
+
+  event.preventDefault();
+
+}
+
+async function soltar(event){
+
+  event.preventDefault();
+
+  const id =
+    event.dataTransfer.getData("id");
+
+  const novoStatus =
+    event.currentTarget.id;
+
+  await client
+    .from("clientes")
+    .update({
+      status:
+        novoStatus.charAt(0).toUpperCase() +
+        novoStatus.slice(1)
+    })
+    .eq("id", id);
+
+  buscarClientes();
 
 }

@@ -280,3 +280,19 @@ button{
   margin:5px 0;
 
 }
+
+.card-cliente{
+
+  cursor:grab;
+
+  transition:.2s;
+
+}
+
+.card-cliente:active{
+
+  cursor:grabbing;
+
+  transform:scale(1.03);
+
+}
