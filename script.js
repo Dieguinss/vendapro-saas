@@ -97,7 +97,7 @@ async function salvarCliente() {
 
   }
 
-  if(error){
+  if (error) {
 
     mostrarToast("Erro ao salvar");
 
@@ -127,9 +127,9 @@ async function carregarClientes() {
     .from("clientes")
     .select("*")
     .eq("user_id", user.id)
-    .order("id", { ascending:false });
+    .order("id", { ascending: false });
 
-  if(error){
+  if (error) {
 
     console.log(error);
 
@@ -143,17 +143,17 @@ async function carregarClientes() {
 
 }
 
-function buscarClientes(){
+function buscarClientes() {
 
   const busca =
     document.getElementById("busca")
-    .value
-    .toLowerCase();
+      .value
+      .toLowerCase();
 
   const filtrados = clientes.filter(cliente =>
 
     cliente.nome.toLowerCase()
-    .includes(busca)
+      .includes(busca)
 
   );
 
@@ -174,7 +174,13 @@ function renderizarClientes(listaClientes) {
   document.getElementById("total-clientes").innerText =
     listaClientes.length;
 
-  let quentes = listaClientes.filter(cliente =>
+  let leads = listaClientes.filter(cliente =>
+
+    cliente.status == "Lead"
+
+  ).length;
+
+  let propostas = listaClientes.filter(cliente =>
 
     cliente.status == "Proposta"
 
@@ -186,13 +192,14 @@ function renderizarClientes(listaClientes) {
 
   ).length;
 
-  document.getElementById("leads-quentes")
-    .innerText = quentes;
+  document.getElementById("total-leads")
+    .innerText = leads;
+
+  document.getElementById("total-propostas")
+    .innerText = propostas;
 
   document.getElementById("clientes-fechados")
     .innerText = fechados;
-
-
 
   listaClientes.forEach((cliente, index) => {
 
@@ -341,7 +348,7 @@ async function soltar(event) {
     })
     .eq("id", id);
 
-  if(error){
+  if (error) {
 
     mostrarToast("Erro ao mover cliente");
 
@@ -357,7 +364,7 @@ async function soltar(event) {
 
 }
 
-function mostrarToast(mensagem){
+function mostrarToast(mensagem) {
 
   const toast =
     document.getElementById("toast");
