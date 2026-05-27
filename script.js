@@ -53,7 +53,7 @@ async function salvarCliente() {
 
   if (nome == "" || telefone == "") {
 
-    alert("Preencha os campos");
+    mostrarToast("Preencha os campos");
 
     return;
 
@@ -74,24 +74,40 @@ async function salvarCliente() {
 
   };
 
+  let error = null;
+
   if (editando != null) {
 
-    const id = clientes[editando].id;
-
-    await client
+    const resposta = await client
       .from("clientes")
       .update(cliente)
-      .eq("id", id);
+      .eq("id", clientes[editando].id);
+
+    error = resposta.error;
 
     editando = null;
 
   } else {
 
-    await client
+    const resposta = await client
       .from("clientes")
       .insert([cliente]);
 
+    error = resposta.error;
+
   }
+
+  if(error){
+
+    mostrarToast("Erro ao salvar");
+
+    console.log(error);
+
+    return;
+
+  }
+
+  mostrarToast("Cliente salvo com sucesso");
 
   carregarClientes();
 
@@ -160,7 +176,7 @@ function renderizarClientes(listaClientes) {
 
   let quentes = listaClientes.filter(cliente =>
 
-    cliente.status == "Quente"
+    cliente.status == "Proposta"
 
   ).length;
 
@@ -316,7 +332,7 @@ async function soltar(event) {
   const novoStatus =
     event.currentTarget.id;
 
-  await client
+  const { error } = await client
     .from("clientes")
     .update({
       status:
@@ -325,6 +341,35 @@ async function soltar(event) {
     })
     .eq("id", id);
 
+  if(error){
+
+    mostrarToast("Erro ao mover cliente");
+
+    console.log(error);
+
+    return;
+
+  }
+
+  mostrarToast("Cliente movido");
+
   carregarClientes();
+
+}
+
+function mostrarToast(mensagem){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.innerText = mensagem;
+
+  toast.classList.add("show");
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  }, 3000);
 
 }
