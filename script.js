@@ -27,7 +27,7 @@ let clientes = [];
 
 let editando = null;
 
-buscarClientes();
+carregarClientes();
 
 function abrirModal() {
 
@@ -93,7 +93,7 @@ async function salvarCliente() {
 
   }
 
-  buscarClientes();
+  carregarClientes();
 
   limparCampos();
 
@@ -101,7 +101,7 @@ async function salvarCliente() {
 
 }
 
-async function buscarClientes() {
+async function carregarClientes() {
 
   const {
     data: { user }
@@ -111,9 +111,9 @@ async function buscarClientes() {
     .from("clientes")
     .select("*")
     .eq("user_id", user.id)
-    .order("id", { ascending: false });
+    .order("id", { ascending:false });
 
-  if (error) {
+  if(error){
 
     console.log(error);
 
@@ -124,6 +124,24 @@ async function buscarClientes() {
   clientes = data;
 
   renderizarClientes(clientes);
+
+}
+
+function buscarClientes(){
+
+  const busca =
+    document.getElementById("busca")
+    .value
+    .toLowerCase();
+
+  const filtrados = clientes.filter(cliente =>
+
+    cliente.nome.toLowerCase()
+    .includes(busca)
+
+  );
+
+  renderizarClientes(filtrados);
 
 }
 
@@ -229,7 +247,7 @@ async function removerCliente(index) {
     .delete()
     .eq("id", id);
 
-  buscarClientes();
+  carregarClientes();
 
 }
 
@@ -307,6 +325,6 @@ async function soltar(event) {
     })
     .eq("id", id);
 
-  buscarClientes();
+  carregarClientes();
 
 }
