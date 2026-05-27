@@ -1,5 +1,3 @@
-verificarLogin();
-
 async function verificarLogin() {
 
   const {
@@ -22,6 +20,8 @@ const client = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
+
+verificarLogin();
 
 let clientes = [];
 
@@ -153,7 +153,7 @@ function renderizarClientes(listaClientes) {
   ).length;
 
   document.getElementById("leads-quentes")
-    .innerText = propostas;
+    .innerText = quentes;
 
   document.getElementById("clientes-fechados")
     .innerText = fechados;
