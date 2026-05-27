@@ -330,3 +330,20 @@ button{
   opacity:1;
 
 }
+.grafico-box{
+
+  background:#1e293b;
+
+  padding:30px;
+
+  border-radius:20px;
+
+  margin-bottom:30px;
+
+}
+
+.grafico-box h2{
+
+  margin-bottom:20px;
+
+}

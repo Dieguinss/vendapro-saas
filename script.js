@@ -192,6 +192,19 @@ function renderizarClientes(listaClientes) {
 
   ).length;
 
+  let contatos = listaClientes.filter(cliente =>
+
+    cliente.status == "Contato"
+
+  ).length;
+
+  atualizarGrafico(
+    leads,
+    contatos,
+    propostas,
+    fechados
+  );
+
   document.getElementById("total-leads")
     .innerText = leads;
 
@@ -361,6 +374,56 @@ async function soltar(event) {
   mostrarToast("Cliente movido");
 
   carregarClientes();
+
+}
+
+let grafico = null;
+
+function atualizarGrafico(
+  leads,
+  contatos,
+  propostas,
+  fechados
+) {
+
+  const ctx =
+    document.getElementById("graficoFunil");
+
+  if (grafico) {
+
+    grafico.destroy();
+
+  }
+
+  grafico = new Chart(ctx, {
+
+    type: "bar",
+
+    data: {
+
+      labels: [
+        "Leads",
+        "Contatos",
+        "Propostas",
+        "Fechados"
+      ],
+
+      datasets: [{
+
+        label: "Clientes",
+
+        data: [
+          leads,
+          contatos,
+          propostas,
+          fechados
+        ]
+
+      }]
+
+    }
+
+  });
 
 }
 
