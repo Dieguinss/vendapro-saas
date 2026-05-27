@@ -144,6 +144,16 @@ button{
   color:white;
 }
 
+.fechar-modal{
+
+  background:#ef4444;
+
+  margin-left:10px;
+
+  color:white;
+
+}
+
 .clientes-topo{
   display:flex;
   justify-content:space-between;
