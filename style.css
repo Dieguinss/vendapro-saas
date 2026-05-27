@@ -180,6 +180,14 @@ button{
 
 }
 
+.btn-sair{
+
+  background:#ef4444;
+
+  color:white;
+
+}
+
 .clientes-topo{
   display:flex;
   justify-content:space-between;
