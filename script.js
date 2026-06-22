@@ -248,23 +248,32 @@ function renderizarClientes(listaClientes) {
 
         </div>
 
-        <div class="acoes">
+      <div class="acoes">
 
-          <button
-            class="editar"
-            onclick="editarCliente(${index})"
-          >
-            Editar
+        <a
+          href="https://wa.me/55${cliente.telefone.replace(/\D/g, '')}"
+          target="_blank"
+        >
+          <button class="whats">
+            WhatsApp
           </button>
+        </a>
 
-          <button
-            class="excluir"
-            onclick="removerCliente(${index})"
-          >
-            Excluir
-          </button>
+        <button
+          class="editar"
+          onclick="editarCliente(${index})"
+        >
+          Editar
+        </button>
 
-        </div>
+        <button
+          class="excluir"
+          onclick="removerCliente(${index})"
+        >
+          Excluir
+        </button>
+
+      </div>
 
       </div>
 
